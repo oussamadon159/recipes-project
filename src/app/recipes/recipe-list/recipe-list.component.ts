@@ -10,17 +10,17 @@ import { Subject } from 'rxjs';
   styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent implements OnInit {
-recipes:Recipe[];
-  constructor(private recipesService:RecipeService) { }
+  recipes: Recipe[];
+  constructor(private recipesService: RecipeService) { }
 
   ngOnInit(): void {
     this.recipes = this.recipesService.getRecipes();
     this.recipesService.SelectedRecipe.subscribe(
-      (recipesElem)=>{
+      (recipesElem) => {
         this.recipes = recipesElem
       }
     )
-    
+
   }
- 
+
 }

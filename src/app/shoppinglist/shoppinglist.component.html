@@ -1,29 +1,24 @@
 <div class="row">
     <div class="col-xs-12">
-        <app-shopping-edit ></app-shopping-edit>
+        <app-shopping-edit></app-shopping-edit>
         <hr>
         <ul class="list-group">
-            <a 
-            style="cursor: pointer;" 
-            class="list-group-item"
-             *ngFor= "let ing of ingredients;let i = index"
-               
-              (click)="OnEdit(i)"
-               >
-            {{ing.name}} ({{ing.amount}})
-        </a>
-        <div *ngIf="!error">
-            <a 
-            style="cursor: pointer;" 
-            class="list-group-item"
-             *ngFor= "let ingredient of newIngredients;let i = index"
-              (click)="OnEdit(i)"
-               >
-               {{ingredient.name}} ({{ingredient.amount}})
+            <!-- <a style="cursor: pointer;" class="list-group-item" *ngFor="let ing of (ingredients | async).ingredients;let i = index"
+                (click)="OnEdit(i)">
+                {{ing.name}} ({{ing.amount}})
+            </a> -->
+            <a style="cursor: pointer;" class="list-group-item" *ngFor="let ing of ingredients;let i = index"
+                (click)="OnEdit(i)"  [@mouvement]>
+                {{ing.name}} ({{ing.amount}})
             </a>
-        </div>
-       
-           
+            <div *ngIf="!error">
+                <a style="cursor: pointer;" class="list-group-item"
+                    *ngFor="let ingredient of newIngredients;let i = index" (click)="OnEdit(i)">
+                    {{ingredient.name}} ({{ingredient.amount}})
+                </a>
+            </div>
+
+
         </ul>
         <div class="alert alert-danger" *ngIf="error">
             <h1> An error has occured ! </h1>
@@ -31,4 +26,3 @@
         </div>
     </div>
 </div>
-

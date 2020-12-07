@@ -1,78 +1,45 @@
-import { AuthInterceptorService } from './auth/auth-interceptor.service';
-import { LoadingSpinnerComponent } from './shared/loading-spinner.component';
-import { AuthServiceSign } from './auth/auth.service';
-import { AuthComponent } from './auth/auth.component';
-import { RecipeResolverService } from './recipes/resolver.service';
-import {  HttpRequestService } from './Service/http-request.service';
-import { AuthGuard } from './auth-guard.service';
-import { AuthService } from './auth.service';
+import { AuthModule } from './auth/auth.module';
+import { RecipesModule } from './recipes/recipes.module';
+import { ShoppingListModule } from './shoppinglist/shopping-list.module';
+import { CoreServiceModule } from './core.module';
+import { SharedModule } from './shared/shared.module';
+
+import { Store, StoreModule } from'@ngrx/store'
 import { ModifieText } from './Directives/highlight.directive';
-import { IngredientService } from './Service/ingredient.service';
-import { RecipeService } from './Service/recipes-manage.service';
-import { RecipeDetailsComponent } from './recipes/recipe-details/recipe-details.component';
-import { OpenToggleDirective } from './Directives/open-toggle.directive';
 import { HeaderComponent } from './Header/header.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RecipesComponent } from './recipes/recipes.component';
-import { ShoppinglistComponent } from './shoppinglist/shoppinglist.component';
-import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
-import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
-import { ShoppingEditComponent } from './shoppinglist/shopping-edit/shopping-edit.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MessageComponent } from './message/message.component';
-import { CanDeactivateGuard } from './shoppinglist/shopping-edit/can-deactivate-guard.service';
+import { FormsModule } from '@angular/forms';
 import { ErrorpageComponent } from './errorpage/errorpage.component';
-import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { HomeComponent } from './home/home.component';
-import {  HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
+import {  HttpClientModule  } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ShoppingListReducer } from './shoppinglist/store/shopping-list.reducer';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RecipesComponent,
-    ShoppinglistComponent,
-    RecipeListComponent,
-    RecipeDetailsComponent,
     HeaderComponent,
-    OpenToggleDirective,
-    RecipeItemComponent,
-    ShoppingEditComponent,
     ModifieText,
-    MessageComponent,
     ErrorpageComponent,
-    RecipeEditComponent,
     HomeComponent,
-    AuthComponent,
-    LoadingSpinnerComponent,
-
-    
-
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
+    StoreModule.forRoot({shoppinglist:ShoppingListReducer}),
     FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
- 
+    SharedModule,
+    CoreServiceModule,
+    BrowserAnimationsModule, 
+    AuthModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
-  providers: [RecipeService,
-    IngredientService,
-    AuthService,
-    AuthGuard,
-    CanDeactivateGuard,
-    HttpRequestService,
-    RecipeResolverService,
-    AuthServiceSign,
-    {
-      provide:HTTP_INTERCEPTORS,
-      useClass:AuthInterceptorService,
-      multi:true
-    }],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

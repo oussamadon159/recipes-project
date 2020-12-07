@@ -14,19 +14,17 @@ export class AuthInterceptorService implements HttpInterceptor {
 
     constructor(private auth:AuthServiceSign){}
     intercept(req:HttpRequest<any>,next:HttpHandler){
-    return  this.auth.user
-    .pipe(
-        take(1),
-        exhaustMap(user=>{
-            if(!user){
-                return next.handle(req);
-            }
-            const modifiedReq = req.clone({
-                params:new HttpParams().set('auth',user.token)
-            });
-            return next.handle(modifiedReq);
-        }))
-       
+
+       return this.auth.user.pipe(take(1),exhaustMap(user=>{
+             
+           if(!user){
+               return next.handle(req);
+           }
+           const modifiedReq = req.clone({
+               params: new HttpParams().set('auth',user.token)
+           })
+           return next.handle(modifiedReq)
+       }))
 
     }
 

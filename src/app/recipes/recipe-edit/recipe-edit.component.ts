@@ -18,7 +18,7 @@ EditMode = false;
 id:number;
 RecipeEdit:FormGroup;
   ngOnInit(): void {
-    // retrieving the id 
+    // retrieving the id
     this.route.params.subscribe(
       (params:Params)=>{
        this.id = +params['id'];
@@ -28,15 +28,19 @@ RecipeEdit:FormGroup;
       }
     )
   }
+
+  get IngredientControls(){
+    return (this.RecipeEdit.get('ingredients') as FormArray ).controls
+  }
   private initForm(){
-    
+
     let recipeName = "";
     let recipeImagePath = "";
     let recipeDesc = "";
     let recipeinfo = "";
     let recipeingredients = new FormArray([]);
     if(this.EditMode){
-     
+
       const recipe = this.recipeSrv.getRecipe(this.id);
       recipeName = recipe.name;
       recipeImagePath = recipe.imagePath;
@@ -47,7 +51,7 @@ RecipeEdit:FormGroup;
         recipeingredients.push(new FormGroup({
           'name':new FormControl(ingredient.name),
           'amount':new FormControl(ingredient.amount,Validators.pattern(/^[1-9]+[0-9]*$/)),
-        }))  
+        }))
         }
       }
     }
@@ -57,7 +61,7 @@ RecipeEdit:FormGroup;
       'desc':new FormControl(recipeinfo,Validators.required),
       'description':new FormControl(recipeDesc,Validators.required),
       'ingredients':recipeingredients,
-      
+
     })
 
   }
@@ -69,11 +73,11 @@ RecipeEdit:FormGroup;
     })
   )
   }
- 
+
   Cancel(){
    this.router.navigate(['../'],{relativeTo:this.route});
   }
-  
+
   OnSubmit(){
     /*let recipename = this.RecipeEdit.get('name').value;
     let recipeimage = this.RecipeEdit.get('image').value;
@@ -87,7 +91,7 @@ RecipeEdit:FormGroup;
     else{
       this.recipeSrv.AddNewRecipe(this.RecipeEdit.value);
       this.RecipeEdit.reset();
-      
+
     }
     this.Cancel();
   }

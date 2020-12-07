@@ -8,13 +8,13 @@ import { Subject } from 'rxjs';
 import { AuthServiceSign } from '../auth/auth.service';
 @Injectable({providedIn:'root'})
 export class HttpRequestService{
-    
+
     constructor(private http:HttpClient,private recipeservice:RecipeService,private authService:AuthServiceSign){
 
     }
     ingAmount = new Subject<number>();
 StoreRecipes(recipes:Recipe[]){
-    
+
     this.http.put('https://recipe-request.firebaseio.com/recipes.json',recipes).subscribe(
         (response)=>{
             console.log(response);

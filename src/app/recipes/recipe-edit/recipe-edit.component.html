@@ -52,7 +52,7 @@
                         <br>
                         <div class="row">
                             <div class="col-xs-12" formArrayName="ingredients" >
-                                  <div 
+                                  <div
                                   class="row" *ngFor="let ingredientCtrl of RecipeEdit.get('ingredients')['controls'];let i = index"
                                    [formGroupName]="i">
                                   <br>
@@ -64,9 +64,9 @@
                                       </div>
                                       <div class="col-xs-2">
                                         <button type="button" class="btn btn-danger" (click)="OnDelete(i)">X</button>
-                                        
+
                                       </div>
-                                      
+
                                   </div>
                                   <hr>
                                   <div class="row">
@@ -80,7 +80,6 @@
                 </div>
             </div>
         </div>
-        
+
         </div>
     </div>
-   

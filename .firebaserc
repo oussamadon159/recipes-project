@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "recipe-request"
+  },
+  "targets": {
+    "recipe-request": {
+      "hosting": {
+        "courseproject": [
+          "recipe-request"
+        ]
+      }
+    }
+  }
+}

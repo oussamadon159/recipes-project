@@ -48,7 +48,7 @@ EditedITem : Ingredient;
          this.EditMode = true;
          this.SlForm.setValue({
            'name':this.EditedITem.name,
-           'amount':this.EditedITem.amount,
+           'amount':this.EditedITem.amount
          })
       }
     )
@@ -56,11 +56,11 @@ EditedITem : Ingredient;
     
   }
   OnSubmit(form:NgForm){
-   /* console.log(this.ShoppingListform);
-   const ingname =  this.ShoppingListform.get('ingname').value;
-   const ingamount = this.ShoppingListform.get('ingamount').value;
-   const newIng = new Ingredient(ingname,ingamount);
-   this.IngService.AddIngredients(newIng);*/
+  //   console.log(this.ShoppingListform);
+  //  const ingname =  this.ShoppingListform.get('ingname').value;
+  //  const ingamount = this.ShoppingListform.get('ingamount').value;
+  //  const newIng = new Ingredient(ingname,ingamount);
+  //  this.IngService.AddIngredients(newIng);
    const value = form.value;
    const newIng = new Ingredient(value.name,value.amount);
    
