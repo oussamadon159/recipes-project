@@ -1,6 +1,5 @@
-import { AuthModule } from './auth/auth.module';
 import { RecipesModule } from './recipes/recipes.module';
-import { ShoppingListModule } from './shoppinglist/shopping-list.module';
+import { AuthModule } from './auth/auth.module';
 import { CoreServiceModule } from './core.module';
 import { SharedModule } from './shared/shared.module';
 
@@ -11,7 +10,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorpageComponent } from './errorpage/errorpage.component';
 import { HomeComponent } from './home/home.component';
 import {  HttpClientModule  } from '@angular/common/http';
@@ -36,7 +35,7 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     SharedModule,
     CoreServiceModule,
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
     AuthModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],
